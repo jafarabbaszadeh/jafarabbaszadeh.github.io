@@ -1,0 +1,393 @@
+/* ------------------------------------------------------------------
+   Academic homepage — two-column layout in the spirit of the
+   AcademicPages / Minimal Mistakes Jekyll theme, but as plain static
+   files: no Jekyll, no build step, no external dependencies.
+   ------------------------------------------------------------------ */
+
+:root {
+  --bg:       #ffffff;
+  --text:     #3a4145;
+  --heading:  #222529;
+  --muted:    #6f777d;
+  --faint:    #9199a0;
+  --rule:     #e4e6e8;
+  --link:     #2e7d9a;      /* muted teal, as in the reference theme */
+  --link-dk:  #1f5a70;
+  --sidebar:  #f8f9fa;
+  --maxw:     1180px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #16191c;
+    --text:    #ccd2d7;
+    --heading: #eef1f3;
+    --muted:   #9aa2a9;
+    --faint:   #777f86;
+    --rule:    #2b3035;
+    --link:    #6fc0dd;
+    --link-dk: #9bd6ec;
+    --sidebar: #1b1f23;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-dk); text-decoration: underline; }
+
+/* ---- masthead ----------------------------------------------------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.masthead-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .4rem 1.4rem;
+  min-height: 56px;
+}
+
+.site-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin-right: auto;
+}
+.site-name:hover { text-decoration: none; color: var(--link); }
+
+.masthead nav a {
+  font-size: .92rem;
+  color: var(--muted);
+  padding: .2rem 0;
+}
+.masthead nav a + a { margin-left: 1.3rem; }
+.masthead nav a:hover,
+.masthead nav a.active { color: var(--link); text-decoration: none; }
+.masthead nav a.active { font-weight: 600; }
+
+/* ---- page frame --------------------------------------------------- */
+
+.page-wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* ---- sidebar ------------------------------------------------------ */
+
+.sidebar {
+  width: 210px;
+  flex: none;
+  position: sticky;
+  top: 80px;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: .9rem;
+  border: 1px solid var(--rule);
+}
+
+.sidebar h3 {
+  margin: 0 0 .25rem;
+  font-size: 1.05rem;
+  color: var(--heading);
+  letter-spacing: -.01em;
+}
+
+.sidebar .bio {
+  margin: 0 0 1rem;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.sidebar li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.sidebar li a,
+.sidebar li span {
+  display: block;
+  padding: .5rem 0;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.sidebar li a:hover { color: var(--link); text-decoration: none; }
+
+/* ---- main column -------------------------------------------------- */
+
+.page {
+  flex: 1;
+  min-width: 0;
+  max-width: 46rem;
+}
+
+.page h1 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--heading);
+}
+
+/* section headings are h1-sized, as in the reference theme */
+.page h2 {
+  margin: 2rem 0 .7rem;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: var(--heading);
+}
+
+.page hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.4rem 0;
+}
+
+.page h3 {
+  margin: 1.6rem 0 .5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+
+.page p { margin: 0 0 1rem; }
+
+.page ul { margin: 0 0 1rem; padding-left: 1.15rem; }
+.page li { margin-bottom: .5rem; }
+
+/* justified body text; hyphenation keeps word gaps even */
+.page p,
+.page li {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+b, strong { color: var(--heading); font-weight: 600; }
+
+.lead { font-size: 1.02rem; }
+
+/* ---- entry lists (education, teaching, awards) -------------------- */
+
+ul.entries { list-style: none; padding-left: 0; }
+
+ul.entries > li {
+  margin-bottom: 1.1rem;
+  overflow: hidden;
+}
+
+.when {
+  float: right;
+  margin-left: 1rem;
+  font-size: .85rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.note {
+  display: block;
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ---- publications ------------------------------------------------- */
+
+ul.pubs { list-style: none; padding-left: 0; }
+
+ul.pubs > li {
+  text-align: left;          /* titles and author lists look stretched if justified */
+  margin-bottom: 1.05rem;
+  font-size: .94rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+ul.pubs .t {
+  display: block;
+  color: var(--heading);
+  font-weight: 500;
+}
+
+ul.pubs.compact > li { font-size: .9rem; margin-bottom: .85rem; }
+
+/* ---- news / talks ------------------------------------------------- */
+
+ul.news { list-style: none; padding-left: 0; }
+
+ul.news > li {
+  margin-bottom: .85rem;
+  font-size: .94rem;
+  line-height: 1.55;
+  padding-left: 6.4rem;
+  text-indent: -6.4rem;
+}
+
+ul.news .date {
+  display: inline-block;
+  width: 6.4rem;
+  text-indent: 0;
+  color: var(--faint);
+  font-size: .85rem;
+}
+
+/* ---- footer ------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+}
+.site-footer div {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.2rem 1.5rem 2.5rem;
+  font-size: .82rem;
+  color: var(--faint);
+}
+
+/* ---- responsive --------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .page-wrap {
+    display: block;
+    padding-top: 2rem;
+  }
+  .sidebar {
+    position: static;
+    width: auto;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .avatar { width: 92px; height: 92px; margin-bottom: 0; }
+  .sidebar ul {
+    border-top: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem 1rem;
+  }
+  .sidebar li { border-bottom: none; }
+  .sidebar li a, .sidebar li span { padding: .15rem 0; }
+  .page { max-width: none; }
+}
+
+@media (max-width: 520px) {
+  .sidebar { flex-direction: column; align-items: flex-start; }
+  .when { float: none; display: block; margin-left: 0; }
+  ul.news > li { padding-left: 0; text-indent: 0; }
+  ul.news .date { display: block; width: auto; }
+  .page h1 { font-size: 1.45rem; }
+  /* columns are too narrow to justify without wide gaps */
+  .page p, .page li { text-align: left; }
+}
+
+.page p.formula .bigO { font-style: italic; }
+
+/* a displayed statement standing in for a formula */
+.page p.formula {
+  margin: 1.2rem 0 1.3rem;
+  padding: .75rem 1rem;
+  border-left: 3px solid var(--rule);
+  background: var(--sidebar);
+  font-size: .97rem;
+  display: flow-root;        /* sits beside a floated figure, not under it */
+}
+
+/* ---- figures lifted from the thesis talks --------------------------- */
+
+.figure {
+  margin: 1.3rem 0 1.5rem;
+  text-align: center;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;          /* the plates are drawn on white */
+  padding: .5rem;
+}
+
+.figure figcaption {
+  margin-top: .5rem;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-align: left;
+}
+
+/* a small figure the text wraps around; on white pages the plate needs
+   no frame, the white ground only shows against the dark theme */
+.figure.side {
+  float: right;
+  width: 17rem;
+  margin: .35rem 0 .9rem 1.6rem;
+}
+.figure.side img {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: .2rem;
+}
+.figure.side img + img { margin-top: .5rem; }   /* stacked panels */
+.figure.side figcaption {
+  margin-top: .3rem;
+  font-size: .8rem;
+  line-height: 1.45;
+}
+
+/* a floated figure never runs into the next section */
+.page h2 { clear: both; }
+
+@media (max-width: 600px) {
+  .figure.side {
+    float: none;
+    width: auto;
+    max-width: 21rem;
+    margin: .4rem auto 1.2rem;
+  }
+}

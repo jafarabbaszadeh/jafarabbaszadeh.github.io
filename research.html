@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research - Jafar Abbaszadeh Chekan</title>
+<meta name="description" content="Jafar Abbaszadeh Chekan - sequential decision-making under uncertainty: online learning, bandit theory, reinforcement learning, optimization and control, with finite-time guarantees.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9211;</text></svg>">
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <a class="site-name" href="index.html">Jafar Abbaszadeh Chekan</a>
+    <nav>
+      <a href="index.html">About</a>
+      <a href="research.html" class="active">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="talks.html">Talks</a>
+      <a href="teaching.html">Teaching</a>
+    </nav>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <aside class="sidebar">
+    <img class="avatar" src="assets/photo.png" onerror="this.style.display='none'" alt="Jafar Abbaszadeh Chekan">
+    <h3>Jafar Abbaszadeh Chekan</h3>
+    <p class="bio">Ph.D. in Aerospace Engineering, University of Illinois Urbana&ndash;Champaign</p>
+    <ul>
+      <li><span>Urbana, IL, USA</span></li>
+      <li><a href="mailto:jafar2@illinois.edu">Email</a></li>
+      <li><a href="https://scholar.google.com/citations?hl=en&amp;user=64oJ2a0AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a></li>
+      <li><a href="https://www.linkedin.com/in/jafar-abbaszadeh">LinkedIn</a></li>
+      <li><a href="assets/cv.pdf">Curriculum Vitae</a></li>
+    </ul>
+  </aside>
+
+  <article class="page">
+    <h1>Research</h1>
+    <hr>
+
+    <p class="lead">
+      I study how a decision-maker should learn and act when the environment is initially
+      unknown. Each action then does double duty: it determines immediate performance, and it
+      generates the data on which later decisions rely. My work asks how information should
+      be acquired while decisions are being made, which guarantees can be maintained during
+      learning rather than only at its end, and what safety, robustness, and scalability cost
+      in performance. Linear&ndash;quadratic and switched systems are the settings in which I
+      analyze these questions, because they admit sharp finite-time results; the questions
+      themselves belong to sequential decision-making in general, which I aim to explore
+      further.
+    </p>
+
+    <h2>Mixed discrete&ndash;continuous decision-making</h2>
+    <figure class="figure side">
+      <img src="assets/fig-best-mode.svg" width="146" height="93"
+           alt="Three arms, each an unknown system shown by a sketch of its trajectory. Arrows labelled 'learn' lead from each arm to a confidence interval on its optimal cost J*. The middle system, whose trajectory settles fastest, has the lowest interval, below a dashed line that the other two lie above, and is marked best.">
+      <figcaption>Each arm is an unknown control system. Its optimal average expected cost
+        <i>J</i><sup>&lowast;</sup> is unknown; it is inferred, with confidence, through
+        learning.</figcaption>
+    </figure>
+    <p>
+      My current work studies decisions that pair a discrete choice, which mode or alternative
+      to commit to, with continuous control within it. A central instance is identification:
+      among several unknown dynamical systems, which has the smallest optimal long-run cost? It
+      is an analogue of best-arm identification in multi-armed bandits, with differences that
+      change the problem. A mode's value is never sampled; it must be inferred by learning the
+      dynamics. Observations depend on the trajectory and on the control policy, so they are not
+      independent samples, and the continuous control choices determine how informative they
+      are. Switching between alternatives may also be limited by safety and by minimum
+      commitment periods.
+    </p>
+    <p>
+      I am developing confidence bounds on mode values, built from system-identification
+      confidence sets and Riccati perturbation analysis, together with allocation rules that
+      respect stability and switching constraints. A guiding question is how the difficulty of
+      identification depends jointly on the gaps between modes, the learnability of each
+      system, and the information gathered through interaction. Related directions include
+      <b>best-region identification</b> over continuously parameterized decision spaces,
+      <b>restless-bandit</b> problems with controlled dynamics, and <b>interacting
+      decision-makers</b>, with
+      applications in energy systems, robotics, and healthcare operations.
+    </p>
+    <ul class="pubs">
+      <li>
+        <span class="t">From Best-Arm to Best-Mode Identification</span>
+        In preparation.
+      </li>
+    </ul>
+
+    <h2>Anytime learning and performance&ndash;safety trade-offs</h2>
+    <figure class="figure side">
+      <img src="assets/fig-anytime.svg" width="135" height="100"
+           alt="Two runs, one color each. Top: both regret curves grow like the square root of t, with the navy curve above the orange one. Bottom: the orange run's state norm swings widely under a high dashed cap, while the navy run's state norm stays low under a lower cap. The time axis has no end marked.">
+      <figcaption>Lower regret does not mean tighter control of the trajectory.</figcaption>
+    </figure>
+    <p>
+      Guarantees for learning-based control are usually stated for a horizon fixed in
+      advance, with exploration tuned to that horizon. For linear&ndash;quadratic systems with
+      unknown dynamics, I developed an anytime algorithm: the exploratory input perturbation
+      decays over time, so no horizon needs to be known, and with high probability the regret
+      is of order &radic;<i>t</i>, up to logarithmic factors, at every time <i>t</i>, together
+      with a bound on the state.
+    </p>
+    <p>
+      However, regret is a cumulative measure: it does not reveal how large the state may
+      become during learning. A central challenge is that switching between individually
+      stabilizing controllers can amplify transient responses. Existing approaches often rely
+      on common Lyapunov functions or impose strong sequential stability, which restricts
+      changes between successive controllers to prevent transient amplification. I showed that
+      these restrictions can be relaxed through a continuously parameterized family of
+      algorithms, equipped with a <b>dwell-time mechanism</b> for
+      <b>exploration&ndash;exploitation trade-off</b> tuning. This
+      framework reveals an explicit trade-off between regret and state regulation: tightening
+      the update rule improves the state bound at the expense of the regret guarantee, but only
+      up to a threshold.
+    </p>
+    <ul class="pubs">
+      <li>
+        <span class="t"><a href="https://arxiv.org/abs/2406.07746">Any-Time Regret-Guaranteed
+        Algorithm for Control of Linear Quadratic Systems</a></span>
+        With C. Langbort. Under revision at <i>Journal of Machine Learning Research</i>.
+      </li>
+    </ul>
+
+    <h2>Decision-making across regime changes</h2>
+    <figure class="figure side">
+      <img src="assets/fig-regime-treatment.svg" width="129" height="68"
+           alt="A patient's state over time under therapies A, B and C. The switch from A to B comes too early and the state spikes above the safe range; the switch from B to C follows a long enough dwell and the state stays inside it.">
+      <figcaption>Personalized treatment: switching therapy too early pushes the patient's
+        state outside the safe range.</figcaption>
+    </figure>
+    <p>
+      Many dynamical systems operate across multiple regimes, such as alternative treatments or
+      operating configurations, each governed by potentially unknown dynamics. Regime changes
+      may be dictated by external decisions or environmental conditions, leaving the
+      controller responsible for learning how to act within each regime and ensuring that
+      transitions occur safely. This is challenging because switching can amplify transient
+      responses even when individual regimes are stable, and switching too early may cause the
+      state to exceed acceptable limits.
+    </p>
+    <p>
+      My research develops learning-based control strategies that accommodate externally
+      specified regime changes while providing guarantees on stability and performance. In my
+      recent work on switched linear&ndash;quadratic systems with unknown dynamics, I developed
+      a data-dependent dwell-time mechanism that regulates transitions and bounds the expected
+      state norm across switches. The resulting expected regret, relative to a benchmark that
+      knows the dynamics of every regime, grows sublinearly with the number of switches, apart
+      from an additional term accounting only for unfavorable transitions&mdash;those into
+      regimes with a higher optimal cost-to-go. These results motivate a related but distinct
+      question: <b>what if the decision-maker can also choose which regime to operate in?</b> This
+      leads to my ongoing research on safe best-mode identification, where learning, regime
+      selection, and switching constraints must be addressed jointly.
+    </p>
+    <ul class="pubs">
+      <li>
+        <span class="t"><a href="https://arxiv.org/abs/2606.22223">Regret-Guaranteed Safe
+        Switching: LQR Setting with Unknown Dynamics</a></span>
+        With S. R. Etesami and C. Langbort. Under review at <i>SIAM Journal on Control and
+        Optimization</i>.
+      </li>
+      <li>
+        <span class="t"><a href="https://doi.org/10.1109/TAC.2024.3440348">Learn and Control
+        while Switching: With Guaranteed Stability and Sublinear Regret</a></span>
+        With C. Langbort. <i>IEEE Transactions on Automatic Control</i>.
+      </li>
+      <li>
+        <span class="t"><a href="https://doi.org/10.1016/j.ifacol.2022.09.327">Joint
+        Stabilization and Regret Minimization through Switching in Over-Actuated
+        Systems</a></span>
+        With K. Azizzadenesheli and C. Langbort. <i>IFAC ROCOND</i>.
+      </li>
+    </ul>
+
+    <h2>Safe and robust learning under uncertainty</h2>
+    <figure class="figure side">
+      <img src="assets/fig-safe-set.svg" width="130" height="77"
+           alt="State space. A dashed region K, the unknown safe set, contains two nested shaded regions, the certified sets K-hat at times t and t-prime, the later one larger. A trajectory starts in the smaller certified set and moves into the larger one without leaving it.">
+      <figcaption>Learning the safe set safely. The safe set depends on the unknown
+        dynamics; its certified inner approximations are valid with high
+        probability.</figcaption>
+    </figure>
+    <p>
+      A learner acting under uncertainty may be unsure not only of how its environment
+      behaves, but also of which decisions are safe and whether the data it learns from can be
+      trusted. My work addresses both: learning under uncertainty-dependent safety
+      constraints, and robustness to adversarial data corruption.
+    </p>
+    <p>
+      In the first setting, the safety set depends on unknown quantities that must
+      be learned while the system operates, so the learner must explore without crossing a
+      boundary it does not yet know. Using kernel-based confidence sets together with control
+      Lyapunov and control barrier function certificates, I designed decision rules that
+      guarantee forward invariance of a certified safe region with high probability while
+      learning the safety set itself.
+    </p>
+    <p>
+      In the second, an adversary corrupts the stored data the learner relies on. For
+      linear&ndash;quadratic decision problems with unknown dynamics, I quantified how this
+      data poisoning propagates through estimation into later decisions: a standard optimistic
+      learner's confidence sets can miss the true model, and its regret can become linear. I
+      developed a self-correcting algorithm whose confidence sets account for bounded
+      corruption, preserving sublinear regret.
+    </p>
+    <ul class="pubs">
+      <li>
+        <span class="t"><a href="https://doi.org/10.23919/ACC55779.2023.10156490">Safety-Aware
+        Learning-Based Control of Systems with Uncertainty-Dependent Constraints</a></span>
+        With C. Langbort. <i>American Control Conference</i>.
+      </li>
+      <li>
+        <span class="t"><a href="https://doi.org/10.1016/j.automatica.2023.110876">Regret Bounds
+        for LQ Adaptive Control Under Database Attacks</a></span>
+        With C. Langbort. <i>Automatica</i>.
+      </li>
+      <li>
+        <span class="t">Safe Learning-Based Control: Higher-Order Control Barrier Functions
+        Certification</span>
+        In preparation.
+      </li>
+    </ul>
+
+  </article>
+
+</div>
+
+<div class="site-footer">
+  <div>&copy; 2026 Jafar Abbaszadeh Chekan. Last updated October 2026.</div>
+</div>
+
+</body>
+</html>
